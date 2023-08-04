@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -19,7 +20,18 @@ public class AccountNumberProcessor {
         System.out.println(new AccountNumberProcessor().getGreeting());
     }
 
-    public Integer convertCharsToInteger(List<String> inputString) {
+    public Integer convertCharsToInteger(List<List<String>> inputNumberStrings) {
+        String col0Row0 = inputNumberStrings.get(0).get(0);
+        String col0Row1 = inputNumberStrings.get(1).get(0);
+        String col0Row2 = inputNumberStrings.get(2).get(0);
+        String firstVerticalMatch = col0Row0 + col0Row1 + col0Row2;
+        HashMap<String, Integer> firstVerticalMatchKey = Key.generateFirstMatchKey();
+        if(firstVerticalMatchKey.containsKey(firstVerticalMatch)){
+            return firstVerticalMatchKey.get(firstVerticalMatch);
+        }
+
+
+
         return null;
     }
 

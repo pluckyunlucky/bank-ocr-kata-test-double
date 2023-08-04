@@ -17,9 +17,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AccountNumberProcessorTest {
     String inputRepresentation = """
-            
-              |
-              |
+             _\s
+            | |
+            |_|
             """;
     String multipleInputRepresentation = "";
 
@@ -44,10 +44,15 @@ class AccountNumberProcessorTest {
         assertIterableEquals(expectedRepresentation, actualRepresentation);
     }
 
-    @Test void canParseSingleRepresentationIntoInteger() {
-        Integer expectedNumber = 1;
+    @Test void canParse2IntoIntegerFromFirstMatch() {
+        Integer expectedNumber = 2;
+        List<List<String>> singleNumber = new ArrayList<>();
+        singleNumber.add(List.of(" ", "_", " "));
+        singleNumber.add(List.of(" ", "_", "|"));
+        singleNumber.add(List.of("|", "_", " "));
         AccountNumberProcessor processor = new AccountNumberProcessor();
-        Integer actualNumber = processor.convertCharsToInteger(Collections.emptyList());
+        Integer actualNumber = processor.convertCharsToInteger(singleNumber);
+        assertEquals(expectedNumber, actualNumber);
     }
 
     @Test void canParseLineIntoIntegers() {
