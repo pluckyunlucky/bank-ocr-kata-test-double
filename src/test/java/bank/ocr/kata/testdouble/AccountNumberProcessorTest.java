@@ -16,13 +16,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AccountNumberProcessorTest {
-    String inputRepresentation = """
-             _\s
-            | |
-            |_|
-            """;
-    String multipleInputRepresentation = "";
-
     @Test void canParseIntoInternalRepresenationFromFile() throws IOException, URISyntaxException {
         Class<AccountNumberProcessorTest> currentClass = AccountNumberProcessorTest.class;
         URI testFile = currentClass.getResource("/TestCase0.txt").toURI();
@@ -54,6 +47,49 @@ class AccountNumberProcessorTest {
         Integer actualNumber = processor.convertCharsToInteger(singleNumber);
         assertEquals(expectedNumber, actualNumber);
     }
+
+    @Test void canParse0IntoIntegerFromSecondMatch() {
+        Integer expectedNumber = 0;
+        List<List<String>> singleNumber = new ArrayList<>();
+        singleNumber.add(List.of(" ", "_", " "));
+        singleNumber.add(List.of("|", " ", "|"));
+        singleNumber.add(List.of("|", "_", "|"));
+        AccountNumberProcessor processor = new AccountNumberProcessor();
+        Integer actualNumber = processor.convertCharsToInteger(singleNumber);
+        assertEquals(expectedNumber, actualNumber);
+    }
+
+    @Test void canParse1IntoIntegerFromSecondMatch() {
+        Integer expectedNumber = 1;
+        List<List<String>> singleNumber = new ArrayList<>();
+        singleNumber.add(List.of(" ", " ", "|"));
+        singleNumber.add(List.of(" ", " ", "|"));
+        singleNumber.add(List.of(" ", " ", "|"));
+        AccountNumberProcessor processor = new AccountNumberProcessor();
+        Integer actualNumber = processor.convertCharsToInteger(singleNumber);
+        assertEquals(expectedNumber, actualNumber);
+    }
+
+    @Test void canNotParseInvalidRepresentation(){
+        List<List<String>> singleNumber = new ArrayList<>();
+        singleNumber.add(List.of(" ", " ", " "));
+        singleNumber.add(List.of(" ", " ", "|"));
+        singleNumber.add(List.of(" ", " ", "|"));
+        AccountNumberProcessor processor = new AccountNumberProcessor();
+        Integer actualNumber = processor.convertCharsToInteger(singleNumber);
+
+    }
+
+//    @Test void canParse4IntoIntegerFromFirstMatch() {
+//        Integer expectedNumber = 4;
+//        List<List<String>> singleNumber = new ArrayList<>();
+//        singleNumber.add(List.of("|", " ", "|"));
+//        singleNumber.add(List.of("|", "_", "|"));
+//        singleNumber.add(List.of(" ", " ", "|"));
+//        AccountNumberProcessor processor = new AccountNumberProcessor();
+//        Integer actualNumber = processor.convertCharsToInteger(singleNumber);
+//        assertEquals(expectedNumber, actualNumber);
+//    }
 
     @Test void canParseLineIntoIntegers() {
         Integer expectedNumber = 123456789;

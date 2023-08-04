@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 
 public class AccountNumberProcessor {
     public String getGreeting() {
-        return "Hello World!";
+        return "Application WIP!";
     }
 
     public static void main(String[] args) {
@@ -25,12 +25,18 @@ public class AccountNumberProcessor {
         String col0Row1 = inputNumberStrings.get(1).get(0);
         String col0Row2 = inputNumberStrings.get(2).get(0);
         String firstVerticalMatch = col0Row0 + col0Row1 + col0Row2;
-        HashMap<String, Integer> firstVerticalMatchKey = Key.generateFirstMatchKey();
-        if(firstVerticalMatchKey.containsKey(firstVerticalMatch)){
-            return firstVerticalMatchKey.get(firstVerticalMatch);
+        if(firstVerticalMatch.equals(Key.matchTwo)){
+            return 2;
         }
 
-
+        String col1Row0 = inputNumberStrings.get(0).get(1);
+        String col1Row1 = inputNumberStrings.get(1).get(1);
+        String col1Row2 = inputNumberStrings.get(2).get(1);
+        String secondVerticalMatch = col1Row0 + col1Row1 + col1Row2;
+        HashMap<String, Integer> secondVerticalMatchKey = Key.generateSecondMatchKey(firstVerticalMatch);
+        if(secondVerticalMatchKey.containsKey(secondVerticalMatch)){
+            return secondVerticalMatchKey.get(secondVerticalMatch);
+        }
 
         return null;
     }

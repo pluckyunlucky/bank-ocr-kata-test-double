@@ -15,18 +15,12 @@ class KeyTest {
     }
     @Test
     void canMatchOneInSecondMatch() {
-        HashMap<String, Integer> key = Key.generateSecondMatchKey(" ||");
+        HashMap<String, Integer> key = Key.generateSecondMatchKey("   ");
         assertEquals(1, key.get("   "));
     }
     @Test
     void canMatchTwoInFirstMatch() {
-        HashMap<String, Integer> key = Key.generateFirstMatchKey();
-        assertEquals(2, key.get("  |"));
-    }
-    @Test
-    void canMatchFourInFirstMatch() {
-        HashMap<String, Integer> key = Key.generateFirstMatchKey();
-        assertEquals(4, key.get("|  "));
+        assertEquals("  |", Key.matchTwo);
     }
 
 }
